@@ -1,28 +1,14 @@
-var fs = require('fs');
-var path = process.argv[2];
-var fileExt = process.argv[3];
-var files = [];
+var fs = require('fs')
+var pathModule = require('path')
+var directoryName = process.argv[2]
+var fileExtension = process.argv[3]
 
-function filterByExt (callback) {
-	fs.readdir(path, function (err, list) {
-		files = list.filter(endsWith);
-		callback(files);
+fs.readdir(directoryName, function (error, list) {
+	if (error) throw error;
+	var filteredList = list.filter(function (name) {
+		return pathModule.extname(name) === '.' + fileExtension;
 	});
-}
-
-//callback function
-function logToTerminal (array) {
-	for ( var i = 0; i < array.length; i++ ){
-		console.log(array[i]);
-	}
-}
-
-//filtering function
-function endsWith (text) {
-	return (text.slice(-Math.abs(fileExt.length+1)) == ('.' + fileExt));
-}
-
-filterByExt(logToTerminal);
-
+	filteredList.forEach(function(name) { console.log(name); });
+});
 
 
