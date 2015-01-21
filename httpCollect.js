@@ -1,3 +1,5 @@
+//Main Challenge is: collecting data from a stream of events?
+
 var http = require('http')
 const bl = require('bl')
 var url = process.argv[2]
